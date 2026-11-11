@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BOSSO PM application Portfolio</title>
+<meta name="description" content="Derek Yee's project portfolio for the UT BOSSO PM application, a WNBA draft fit model and a prediction market synthetics trading project.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --surface: #ffffff;
+    --ink: #14171c;
+    --muted: #5d636e;
+    --line: #dedad1;
+    --accent: #bf5700;
+    --accent-ink: #ffffff;
+    --navy: #0f2a44;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101317;
+      --surface: #181c22;
+      --ink: #eceae5;
+      --muted: #9aa1ac;
+      --line: #2a3039;
+      --accent: #e8792b;
+      --accent-ink: #101317;
+      --navy: #0b1d30;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.6 Inter, system-ui, sans-serif;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  header.hero {
+    background: var(--navy);
+    color: #f3f1ec;
+    padding: 64px 0 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  header.hero::after {
+    content: "";
+    position: absolute;
+    right: -120px; top: -120px;
+    width: 360px; height: 360px;
+    border: 40px solid rgba(232,121,43,.18);
+    border-radius: 50%;
+  }
+  .eyebrow {
+    font: 600 12px/1 Inter, sans-serif;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #e8792b;
+    margin: 0 0 16px;
+  }
+  h1 {
+    font: 800 clamp(34px, 6vw, 60px)/1.04 Archivo, sans-serif;
+    margin: 0 0 18px;
+    letter-spacing: -.02em;
+    max-width: 14ch;
+  }
+  .hero p.lede { max-width: 58ch; color: #c7ccd4; margin: 0 0 28px; font-size: 17px; }
+  .jump { display: flex; flex-wrap: wrap; gap: 10px; }
+  .jump a {
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,.25);
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  .jump a:hover { background: rgba(255,255,255,.08); }
+
+  section.project { padding: 64px 0 16px; }
+  .proj-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px 24px;
+    align-items: end;
+    margin-bottom: 20px;
+  }
+  .num { font: 700 13px/1 Archivo, sans-serif; color: var(--accent); letter-spacing: .1em; }
+  h2 { font: 800 clamp(26px, 4vw, 36px)/1.1 Archivo, sans-serif; margin: 8px 0 10px; letter-spacing: -.01em; }
+  .proj-head p { margin: 0; color: var(--muted); max-width: 64ch; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .tags span {
+    font-size: 12px; font-weight: 500;
+    padding: 4px 10px; border-radius: 6px;
+    background: var(--surface); border: 1px solid var(--line); color: var(--muted);
+  }
+  .dl {
+    text-decoration: none; font-weight: 600; font-size: 14px;
+    background: var(--accent); color: var(--accent-ink);
+    padding: 10px 16px; border-radius: 8px; white-space: nowrap;
+  }
+
+  .viewer {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px;
+  }
+  .stage {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .stage img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .nav-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 0; cursor: pointer;
+    background: rgba(15,20,28,.6); color: #fff;
+    font-size: 20px; line-height: 44px;
+    opacity: 0; transition: opacity .15s;
+  }
+  .stage:hover .nav-btn, .nav-btn:focus-visible { opacity: 1; }
+  .nav-btn.prev { left: 12px; }
+  .nav-btn.next { right: 12px; }
+  .bar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; padding: 12px 4px 10px;
+    font-size: 14px; color: var(--muted);
+  }
+  .bar .ctrls { display: flex; gap: 8px; }
+  .bar button {
+    font: 500 14px Inter, sans-serif;
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--line); border-radius: 8px;
+    padding: 6px 12px; cursor: pointer;
+  }
+  .bar button:hover { border-color: var(--accent); }
+  .thumbs {
+    display: flex; gap: 8px; overflow-x: auto;
+    padding: 4px 2px 6px; scroll-snap-type: x mandatory;
+  }
+  .thumbs button {
+    flex: 0 0 auto; width: 112px; aspect-ratio: 16/9;
+    padding: 0; border: 2px solid transparent; border-radius: 6px;
+    overflow: hidden; cursor: pointer; background: #000;
+    scroll-snap-align: start; opacity: .6; transition: opacity .15s;
+  }
+  .thumbs button:hover { opacity: .9; }
+  .thumbs button[aria-current="true"] { border-color: var(--accent); opacity: 1; }
+  .thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .stage:fullscreen { border-radius: 0; }
+
+  footer {
+    margin-top: 64px; padding: 28px 0 40px;
+    border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 14px;
+  }
+
+  @media (max-width: 640px) {
+    header.hero { padding: 44px 0 40px; }
+    .proj-head { grid-template-columns: 1fr; }
+    .dl { justify-self: start; }
+    .nav-btn { opacity: 1; width: 36px; height: 36px; line-height: 36px; font-size: 16px; }
+    .thumbs button { width: 88px; }
+    #fs-stat, #fs-wnba { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Derek Yee · UT Austin</p>
+    <h1>BOSSO PM application Portfolio</h1>
+    <p class="lede">Two sports analytics projects. One builds a draft recommendation model for WNBA front offices. The other prices NBA and NHL playoff series markets on Kalshi and Polymarket and tests whether the gap between game and series odds is tradeable.</p>
+    <nav class="jump">
+      <a href="#wnba">01 · WNBA Draft Fit Model</a>
+      <a href="#stat">02 · Prediction Market Synthetics</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="project" id="wnba">
+    <div class="proj-head">
+      <div>
+        <div class="num">PROJECT 01</div>
+        <h2>WNBA Draft Fit Model</h2>
+        <p>Solo project. NCAA women's basketball stats (2022 to 2026) feed an XGBoost readiness score and a team fit score built from each franchise's statistical deficits. WNBA player seasons are clustered into six archetypes with a Gaussian Mixture Model, and the final ranking blends readiness (55%) with fit (45%).</p>
+        <div class="tags"><span>XGBoost</span><span>Gaussian Mixture Model</span><span>Logistic regression</span><span>Sports Reference data</span></div>
+      </div>
+      <a class="dl" href="slides/wnba/deck.pdf" download>Download PDF</a>
+    </div>
+    <div class="viewer" data-deck="wnba" data-count="7"></div>
+  </section>
+
+  <section class="project" id="stat">
+    <div class="proj-head">
+      <div>
+        <div class="num">PROJECT 02</div>
+        <h2>Prediction Market Synthetics</h2>
+        <p>Team project with Andrew, Drishti, Clinton, Anirudh and Yiming. The deck tests whether market makers misprice series odds conditional on single game outcomes, using synthetic positions to hedge out game exposure. Data covers 768 Kalshi contracts and second by second Polymarket order books across the 2025 and 2026 NBA and NHL playoffs. Derek led the home court pricing and series mispricing analysis.</p>
+        <div class="tags"><span>Kalshi</span><span>Polymarket</span><span>Market making</span><span>Gradient boosting</span><span>Elo</span></div>
+      </div>
+      <a class="dl" href="slides/stat-arb/deck.pdf" download>Download PDF</a>
+    </div>
+    <div class="viewer" data-deck="stat-arb" data-count="35"></div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">Derek Yee · Statistics and Data Science, UT Austin · Use ← and → to move through the deck you last clicked.</div>
+</footer>
+
+<script>
+(function () {
+  var active = null;
+  function pad(n) { return n < 10 ? "0" + n : "" + n; }
+
+  document.querySelectorAll(".viewer").forEach(function (v) {
+    var deck = v.dataset.deck, count = +v.dataset.count, i = 1;
+    var src = function (n) { return "slides/" + deck + "/s-" + pad(n) + ".jpg"; };
+
+    v.innerHTML =
+      '<div class="stage">' +
+        '<img alt="">' +
+        '<button class="nav-btn prev" aria-label="Previous slide">‹</button>' +
+        '<button class="nav-btn next" aria-label="Next slide">›</button>' +
+      '</div>' +
+      '<div class="bar"><span class="count"></span>' +
+        '<span class="ctrls"><button class="b-prev">Prev</button><button class="b-next">Next</button>' +
+        '<button class="b-fs">Full screen</button></span></div>' +
+      '<div class="thumbs" role="tablist"></div>';
+
+    var img = v.querySelector(".stage img"), stage = v.querySelector(".stage");
+    var counter = v.querySelector(".count"), thumbs = v.querySelector(".thumbs");
+
+    for (var n = 1; n <= count; n++) {
+      var b = document.createElement("button");
+      b.setAttribute("aria-label", "Slide " + n);
+      b.innerHTML = '<img loading="lazy" alt="" src="' + src(n) + '">';
+      b.addEventListener("click", (function (k) { return function () { go(k); }; })(n));
+      thumbs.appendChild(b);
+    }
+
+    function go(n) {
+      i = Math.min(count, Math.max(1, n));
+      img.src = src(i);
+      img.alt = "Slide " + i + " of " + count;
+      counter.textContent = "Slide " + i + " / " + count;
+      thumbs.querySelectorAll("button").forEach(function (t, k) {
+        t.setAttribute("aria-current", k + 1 === i ? "true" : "false");
+      });
+      var cur = thumbs.children[i - 1];
+      thumbs.scrollTo({ left: cur.offsetLeft - thumbs.clientWidth / 2 + cur.clientWidth / 2, behavior: "smooth" });
+      if (i < count) { var pre = new Image(); pre.src = src(i + 1); }
+    }
+
+    var api = { prev: function () { go(i - 1); }, next: function () { go(i + 1); } };
+    v.querySelector(".prev").onclick = v.querySelector(".b-prev").onclick = api.prev;
+    v.querySelector(".next").onclick = v.querySelector(".b-next").onclick = api.next;
+    v.querySelector(".b-fs").onclick = function () {
+      if (stage.requestFullscreen) stage.requestFullscreen();
+    };
+    v.addEventListener("pointerdown", function () { active = api; });
+
+    var x0 = null;
+    stage.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    stage.addEventListener("touchend", function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) (dx < 0 ? api.next : api.prev)();
+      x0 = null;
+    });
+
+    if (!active) active = api;
+    go(1);
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (!active) return;
+    if (e.key === "ArrowRight") active.next();
+    if (e.key === "ArrowLeft") active.prev();
+  });
+})();
+</script>
+</body>
+</html>
